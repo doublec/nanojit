@@ -1,0 +1,37 @@
+Nanojit
+=======
+
+Nanojit is a small cross platform C++ library that emits machine
+code. It was originally part of Adobe's Tamarin ActionScript VM. It is
+also used by Mozilla in their 'TraceMonkey' JavaScript implementation.
+
+I'm using it in a couple of my projects so I pulled the source out of
+those projects and made it into a separate repository. The current
+source was refreshed from Mozilla's mozilla-central repository at
+commit id xxxx.
+
+I'll periodically update from the original repositories to get bug
+fixes and improvements.
+
+License
+=======
+
+The source code is tri-licensed under MPL 1.1/GPL 2.0/LGPL 2.1. See
+the LICENSE file for details.
+
+Build
+=====
+
+A makefile is provided. It currently only builds a version of nanojit
+for x86 machine code generation. Feel free to tweak, submit patches,
+etc to fix this.
+
+Documentation
+=============
+
+See the documentation at the Mozilla developer site:
+
+  https://developer.mozilla.org/En/Nanojit
+
+The example program from that documentation is in the 'example'
+subdirectory.
