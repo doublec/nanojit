@@ -65,7 +65,7 @@ int main()
     // Emit a LIR_loop instruction.  It won't be reached, but there's
     // an assertion in Nanojit that trips if a fragment doesn't end with
     // a guard (a bug in Nanojit). 
-    LIns *rec_ins = writer0.skip(sizeof(GuardRecord) + sizeof(SideExit));
+    LIns *rec_ins = writer0.insSkip(sizeof(GuardRecord) + sizeof(SideExit));
     GuardRecord *guard = (GuardRecord *) rec_ins->payload();
     memset(guard, 0, sizeof(*guard));
     SideExit *exit = (SideExit *)(guard + 1);
