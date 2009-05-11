@@ -86,5 +86,12 @@ int main()
     AddTwoFn fn = reinterpret_cast<AddTwoFn>(f->code());
     printf("2 + 5 = %d\n", fn(5));
 
+    delete buf;
+    delete f;
+#ifdef DEBUG
+    delete fragmento->labels;
+#endif
+    delete fragmento;
+    delete gc;
     return 0;
 }

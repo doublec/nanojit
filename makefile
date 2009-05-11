@@ -1,4 +1,4 @@
-CFLAGS=-g -DDEBUG -include mozilla-config.h
+CFLAGS=-g -include mozilla-config.h
 
 all: libnanojit.a
 
