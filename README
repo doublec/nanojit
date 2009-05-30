@@ -8,7 +8,7 @@ also used by Mozilla in their 'TraceMonkey' JavaScript implementation.
 I'm using it in a couple of my projects so I pulled the source out of
 those projects and made it into its own repository. The current source
 was refreshed from Mozilla's mozilla-central repository at commit id
-aa33c6 (http://hg.mozilla.org/mozilla-central).
+c11a84 (http://hg.mozilla.org/mozilla-central).
 
 I'll periodically update from the original repositories to get bug
 fixes and improvements.

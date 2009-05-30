@@ -115,7 +115,7 @@ namespace nanojit
 		_freePages.clear();
 		while( _allocList.size() > 0 )
 		{
-			//fprintf(stderr,"dealloc %x\n", (intptr_t)_allocList.get(_allocList.size()-1));
+			//nj_dprintf("dealloc %x\n", (intptr_t)_allocList.get(_allocList.size()-1));
 #ifdef MEMORY_INFO
 			ChangeSizeExplicit("NanoJitMem", -1, _gcHeap->Size(_allocList.last()));
 #endif
@@ -193,7 +193,7 @@ namespace nanojit
 			ChangeSizeExplicit("NanoJitMem", 1, _gcHeap->Size(memory));
 #endif
 			NanoAssert((int*)memory == pageTop(memory));
-			//fprintf(stderr,"head alloc of %d at %x of %d pages using nj page size of %d\n", gcpages, (intptr_t)memory, (intptr_t)_gcHeap->kNativePageSize, NJ_PAGE_SIZE);
+			//nj_dprintf("head alloc of %d at %x of %d pages using nj page size of %d\n", gcpages, (intptr_t)memory, (intptr_t)_gcHeap->kNativePageSize, NJ_PAGE_SIZE);
 
             entry = NJ_NEW(gc, AllocEntry);
             entry->page = memory;
@@ -204,7 +204,7 @@ namespace nanojit
 			Page* page = memory;
 			while(--count >= 0)
 			{
-				//fprintf(stderr,"Fragmento::pageGrow adding page %x ; %d\n", (unsigned)page, _freePages.size()+1);
+				//nj_dprintf("Fragmento::pageGrow adding page %x ; %d\n", (unsigned)page, _freePages.size()+1);
 				_freePages.add(page++);
 			}
 			trackPages();
@@ -226,13 +226,6 @@ namespace nanojit
 		NJ_DELETE(f);
 	}
 
-	void Fragmento::clearFrag(const void* ip)
-	{
-		if (_frags.containsKey(ip)) {
-			clearFragment(_frags.remove(ip));
-		}
-	}
-
 	void Fragmento::clearFrags()
 	{
 		// reclaim any dangling native pages
@@ -246,7 +239,7 @@ namespace nanojit
 		verbose_only( mergeCounts->clear();)
 		verbose_only( _stats.flushes++ );
 		verbose_only( _stats.compiles = 0 );
-		//fprintf(stderr, "Fragmento.clearFrags %d free pages of %d\n", _stats.freePages, _stats.pages);
+		//nj_dprintf("Fragmento.clearFrags %d free pages of %d\n", _stats.freePages, _stats.pages);
 	}
 
 	Assembler* Fragmento::assm()
@@ -294,29 +287,6 @@ namespace nanojit
 		labels->add(f, sizeof(Fragment), 0, fragname);
 	}
 #endif
-
-	Fragment *Fragmento::getMerge(GuardRecord *lr, const void* ip)
-    {
-		Fragment *anchor = lr->exit->from->anchor;
-		for (Fragment *f = anchor->branches; f != 0; f = f->nextbranch) {
-			if (f->kind == MergeTrace && f->ip == ip /*&& f->calldepth == lr->calldepth*/) {
-				// found existing shared branch on anchor
-				return f;
-			}
-		}
-
-		Fragment *f = newBranch(anchor, ip);
-		f->root = f;
-		f->kind = MergeTrace;
-		verbose_only(
-			int mergeid = 1;
-			for (Fragment *g = anchor->branches; g != 0; g = g->nextbranch)
-				if (g->kind == MergeTrace)
-					mergeid++;
-			addLabel(f, "M", mergeid); 
-		)
-        return f;
-    }
 
 	Fragment *Fragmento::createBranch(SideExit* exit, const void* ip)
     {
@@ -561,7 +531,6 @@ namespace nanojit
 		  loopEntry(NULL),
 		  vmprivate(NULL),
 		  _code(NULL),
-		  _links(NULL),
 		  _hits(0),
 		  _pages(NULL)
 	{
@@ -573,12 +542,6 @@ namespace nanojit
 		NanoAssert(_pages == 0);
     }
 
-    void Fragment::resetHits()
-    {
-        blacklistLevel >>= 1;
-        _hits = 0;
-    }
-	
     void Fragment::blacklist()
     {
         blacklistLevel++;
