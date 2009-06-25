@@ -20,9 +20,6 @@ NativeARM.o: NativeARM.cpp
 NativeSparc.o: NativeSparc.cpp
 	g++ -c $(CFLAGS) -o NativeSparc.o NativeSparc.cpp
 
-NativeThumb.o: NativeThumb.cpp
-	g++ -c $(CFLAGS) -o NativeThumb.o NativeThumb.cpp
-
 Nativei386.o: Nativei386.cpp
 	g++ -c $(CFLAGS) -o Nativei386.o Nativei386.cpp
 

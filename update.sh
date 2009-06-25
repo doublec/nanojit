@@ -9,8 +9,6 @@ cp $1/js/src/nanojit/NativeARM.cpp .
 cp $1/js/src/nanojit/NativeARM.h .
 cp $1/js/src/nanojit/NativeSparc.cpp .
 cp $1/js/src/nanojit/NativeSparc.h .
-cp $1/js/src/nanojit/NativeThumb.cpp .
-cp $1/js/src/nanojit/NativeThumb.h .
 cp $1/js/src/nanojit/Nativei386.cpp .
 cp $1/js/src/nanojit/Nativei386.h .
 cp $1/js/src/nanojit/RegAlloc.cpp .
@@ -19,6 +17,7 @@ cp $1/js/src/nanojit/TraceTreeDrawer.cpp .
 cp $1/js/src/nanojit/TraceTreeDrawer.h .
 cp $1/js/src/nanojit/avmplus.cpp .
 cp $1/js/src/nanojit/avmplus.h .
+cp $1/js/src/nanojit/LIRopcode.tbl .
 #js-config.h
 #jsapi.h
 #jsautocfg.h
