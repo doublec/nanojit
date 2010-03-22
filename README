@@ -1,3 +1,14 @@
+[ Note: I've deprecated this library and will no longer be updating it ]
+[ Mozilla and Adobe have recently merged their Nanojit implementations ]
+[ and set up a shared repository to develop it further:                ]
+[                                                                      ]
+[   http://hg.mozilla.org/projects/nanojit-central                     ]
+[                                                                      ]
+[ I've created a git repository that mirrors this at:                  ]
+[                                                                      ]
+[   http://github.com/doublec/nanojit-central                          ]
+[                                                                      ]
+
 Nanojit
 =======
 
